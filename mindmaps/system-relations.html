@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>RBAC 系统关系图</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0f1117; font-family: 'SF Pro', -apple-system, sans-serif; padding: 40px; min-height: 100vh; }
+h1 { text-align: center; color: #fff; font-size: 20px; margin-bottom: 40px; opacity: 0.8; }
+
+.diagram { display: flex; flex-direction: column; gap: 40px; max-width: 1000px; margin: 0 auto; }
+
+/* 层级标签 */
+.layer-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 12px;
+}
+
+/* 节点行 */
+.row { display: flex; gap: 16px; align-items: stretch; }
+.row.center { justify-content: center; }
+.row.spread { justify-content: space-between; }
+
+/* 节点卡片 */
+.node {
+  border-radius: 12px;
+  padding: 14px 18px;
+  min-width: 130px;
+  position: relative;
+}
+.node .title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.node .fields { font-size: 11px; opacity: 0.6; line-height: 1.7; }
+.node .badge { font-size: 10px; padding: 2px 8px; border-radius: 20px; display: inline-block; margin-top: 6px; font-weight: 600; }
+
+/* 颜色主题 */
+.blue  { background: #1e2a45; border: 1.5px solid #3b82f6; }
+.blue .title { color: #60a5fa; }
+.blue .badge { background: #1d4ed8; color: #bfdbfe; }
+
+.green { background: #1a2e20; border: 1.5px solid #22c55e; }
+.green .title { color: #4ade80; }
+.green .badge { background: #15803d; color: #bbf7d0; }
+
+.purple { background: #221a35; border: 1.5px solid #a855f7; }
+.purple .title { color: #c084fc; }
+.purple .badge { background: #6b21a8; color: #e9d5ff; }
+
+.orange { background: #2a1f15; border: 1.5px solid #f97316; }
+.orange .title { color: #fb923c; }
+.orange .badge { background: #c2410c; color: #fed7aa; }
+
+.cyan { background: #0f2535; border: 1.5px solid #06b6d4; }
+.cyan .title { color: #22d3ee; }
+.cyan .badge { background: #0e7490; color: #a5f3fc; }
+
+.pink { background: #2d1a2a; border: 1.5px solid #ec4899; }
+.pink .title { color: #f472b6; }
+.pink .badge { background: #9d174d; color: #fce7f3; }
+
+/* 连接线区域 */
+.connectors { display: flex; justify-content: center; }
+.arrow-group { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.arrow-line { width: 2px; height: 20px; background: rgba(255,255,255,0.15); }
+.arrow-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+
+/* 关系线容器 */
+.relations {
+  background: #161b27;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 24px;
+}
+.relations h3 { color: rgba(255,255,255,0.5); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+.rel-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+.rel-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.rel-item .from { font-weight: 700; }
+.rel-item .arrow { color: rgba(255,255,255,0.3); font-size: 16px; }
+.rel-item .type { font-size: 10px; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+</style>
+</head>
+<body>
+<h1>🏗️ RBAC 权限管理系统 — 数据模型关系图</h1>
+
+<div class="diagram">
+
+  <!-- 核心实体层 -->
+  <div>
+    <div class="layer-label">核心实体</div>
+    <div class="row spread">
+
+      <div class="node blue">
+        <div class="title">👤 User 用户</div>
+        <div class="fields">
+          id · email · password<br>
+          name · avatar · status<br>
+          departmentId
+        </div>
+        <span class="badge">主体</span>
+      </div>
+
+      <div class="node green">
+        <div class="title">🛡️ Role 角色</div>
+        <div class="fields">
+          id · name · description
+        </div>
+        <span class="badge">权限载体</span>
+      </div>
+
+      <div class="node purple">
+        <div class="title">🔑 Permission 权限</div>
+        <div class="fields">
+          id · name · type<br>
+          module · action · path<br>
+          icon · sort · parentId
+        </div>
+        <span class="badge">menu/page/button/api</span>
+      </div>
+
+      <div class="node orange">
+        <div class="title">🏢 Department 部门</div>
+        <div class="fields">
+          id · name · description<br>
+          parentId · sort
+        </div>
+        <span class="badge">树形结构</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 中间表层 -->
+  <div>
+    <div class="layer-label">关联中间表（多对多）</div>
+    <div class="row center" style="gap:40px">
+
+      <div class="node cyan">
+        <div class="title">UserRole</div>
+        <div class="fields">
+          userId → User<br>
+          roleId → Role<br>
+          createdAt
+        </div>
+        <span class="badge">用户-角色</span>
+      </div>
+
+      <div class="node cyan">
+        <div class="title">RolePermission</div>
+        <div class="fields">
+          roleId → Role<br>
+          permissionId → Permission
+        </div>
+        <span class="badge">角色-权限</span>
+      </div>
+
+      <div class="node cyan">
+        <div class="title">Account 账号</div>
+        <div class="fields">
+          userId → User<br>
+          provider · providerAccountId<br>
+          accessToken
+        </div>
+        <span class="badge">登录方式</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 业务层 -->
+  <div>
+    <div class="layer-label">业务模块</div>
+    <div class="row center" style="gap:40px">
+
+      <div class="node pink">
+        <div class="title">📁 Project 项目</div>
+        <div class="fields">
+          id · name · description<br>
+          status · startDate · endDate<br>
+          ownerId → User<br>
+          departmentId → Department
+        </div>
+        <span class="badge">planning/active/completed/archived</span>
+      </div>
+
+      <div class="node pink">
+        <div class="title">ProjectMember</div>
+        <div class="fields">
+          projectId → Project<br>
+          userId → User<br>
+          role（owner/member）
+        </div>
+        <span class="badge">项目成员</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 关系说明 -->
+  <div class="relations">
+    <h3>实体关系说明</h3>
+    <div class="rel-list">
+      <div class="rel-item">
+        <span class="from" style="color:#60a5fa">User</span>
+        <span class="arrow">→</span>
+        <span style="color:#4ade80">Role</span>
+        <span class="type">多对多</span>
+        <span style="color:rgba(255,255,255,0.4)">通过 UserRole</span>
+      </div>
+      <div class="rel-item">
+        <span class="from" style="color:#4ade80">Role</span>
+        <span class="arrow">→</span>
+        <span style="color:#c084fc">Permission</span>
+        <span class="type">多对多</span>
+        <span style="color:rgba(255,255,255,0.4)">通过 RolePermission</span>
+      </div>
+      <div class="rel-item">
+        <span class="from" style="color:#60a5fa">User</span>
+        <span class="arrow">→</span>
+        <span style="color:#fb923c">Department</span>
+        <span class="type">多对一</span>
+        <span style="color:rgba(255,255,255,0.4)">用户属于部门</span>
+      </div>
+      <div class="rel-item">
+        <span class="from" style="color:#fb923c">Department</span>
+        <span class="arrow">→</span>
+        <span style="color:#fb923c">Department</span>
+        <span class="type">自关联</span>
+        <span style="color:rgba(255,255,255,0.4)">树形父子关系</span>
+      </div>
+      <div class="rel-item">
+        <span class="from" style="color:#c084fc">Permission</span>
+        <span class="arrow">→</span>
+        <span style="color:#c084fc">Permission</span>
+        <span class="type">自关联</span>
+        <span style="color:rgba(255,255,255,0.4)">权限树形结构</span>
+      </div>
+      <div class="rel-item">
+        <span class="from" style="color:#60a5fa">User</span>
+        <span class="arrow">→</span>
+        <span style="color:#22d3ee">Account</span>
+        <span class="type">一对多</span>
+        <span style="color:rgba(255,255,255,0.4)">多种登录方式</span>
+      </div>
+      <div class="rel-item">
+        <span class="from" style="color:#f472b6">Project</span>
+        <span class="arrow">→</span>
+        <span style="color:#fb923c">Department</span>
+        <span class="type">多对一</span>
+        <span style="color:rgba(255,255,255,0.4)">项目属于部门</span>
+      </div>
+      <div class="rel-item">
+        <span class="from" style="color:#f472b6">Project</span>
+        <span class="arrow">→</span>
+        <span style="color:#60a5fa">User</span>
+        <span class="type">多对多</span>
+        <span style="color:rgba(255,255,255,0.4)">通过 ProjectMember</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 权限流转 -->
+  <div class="relations">
+    <h3>权限鉴权流程</h3>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,0.7)">
+      <div style="background:#1e2a45;border:1px solid #3b82f6;border-radius:8px;padding:8px 14px;color:#60a5fa;font-weight:700">用户登录</div>
+      <div style="color:rgba(255,255,255,0.3);font-size:18px">→</div>
+      <div style="background:#0f2535;border:1px solid #06b6d4;border-radius:8px;padding:8px 14px;color:#22d3ee;font-weight:700">生成 JWT</div>
+      <div style="color:rgba(255,255,255,0.3);font-size:18px">→</div>
+      <div style="background:#161b27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 14px">中间件验证 token</div>
+      <div style="color:rgba(255,255,255,0.3);font-size:18px">→</div>
+      <div style="background:#1a2e20;border:1px solid #22c55e;border-radius:8px;padding:8px 14px;color:#4ade80;font-weight:700">查询用户角色</div>
+      <div style="color:rgba(255,255,255,0.3);font-size:18px">→</div>
+      <div style="background:#221a35;border:1px solid #a855f7;border-radius:8px;padding:8px 14px;color:#c084fc;font-weight:700">获取角色权限</div>
+      <div style="color:rgba(255,255,255,0.3);font-size:18px">→</div>
+      <div style="background:#161b27;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 14px">前端动态渲染菜单/按钮</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
