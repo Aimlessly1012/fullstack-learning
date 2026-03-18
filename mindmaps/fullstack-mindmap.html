@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>全栈学习路线思维导图</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0f1117; font-family: 'SF Pro', -apple-system, sans-serif; overflow-x: auto; }
+.container { min-width: 1400px; padding: 40px; }
+h1 { text-align: center; color: #fff; font-size: 24px; margin-bottom: 40px; opacity: 0.9; }
+.map { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+
+.branch { border-radius: 16px; padding: 20px; min-width: 200px; max-width: 240px; }
+.branch h2 { font-size: 15px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.branch ul { list-style: none; }
+.branch ul li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: rgba(255,255,255,0.8); display: flex; align-items: center; gap: 6px; }
+.branch ul li:last-child { border-bottom: none; }
+.tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 600; flex-shrink: 0; }
+.p0 { background: #ef4444; color: #fff; }
+.p1 { background: #f97316; color: #fff; }
+.p2 { background: #8b5cf6; color: #fff; }
+
+.b1 { background: #1a1f2e; border: 1px solid #2563eb33; }
+.b1 h2 { color: #60a5fa; }
+.b2 { background: #1a1f2e; border: 1px solid #16a34a33; }
+.b2 h2 { color: #4ade80; }
+.b3 { background: #1a1f2e; border: 1px solid #d9770633; }
+.b3 h2 { color: #fb923c; }
+.b4 { background: #1a1f2e; border: 1px solid #7c3aed33; }
+.b4 h2 { color: #c084fc; }
+.b5 { background: #1a1f2e; border: 1px solid #0891b233; }
+.b5 h2 { color: #22d3ee; }
+.b6 { background: #1a1f2e; border: 1px solid #be123c33; }
+.b6 h2 { color: #fb7185; }
+
+.timeline { margin-top: 40px; }
+.timeline h2 { color: #fff; font-size: 18px; margin-bottom: 20px; text-align: center; }
+.months { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.month { background: #1a1f2e; border-radius: 12px; padding: 16px; min-width: 280px; max-width: 320px; }
+.month h3 { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+.m1 h3 { color: #60a5fa; }
+.m2 h3 { color: #4ade80; }
+.m3 h3 { color: #c084fc; }
+.month .week { margin-bottom: 10px; }
+.month .week-title { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+.month .week-content { font-size: 13px; color: rgba(255,255,255,0.85); }
+
+.core { margin-top: 40px; background: linear-gradient(135deg, #1a1f2e, #0f1117); border: 1px solid #f59e0b33; border-radius: 16px; padding: 24px; max-width: 800px; margin-left: auto; margin-right: auto; }
+.core h2 { color: #fbbf24; font-size: 16px; margin-bottom: 16px; text-align: center; }
+.core-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.core-item { background: rgba(255,255,255,0.03); border-radius: 8px; padding: 12px; }
+.core-item .num { color: #fbbf24; font-size: 20px; font-weight: 800; }
+.core-item .label { color: #fff; font-size: 13px; font-weight: 600; margin: 4px 0; }
+.core-item .desc { color: rgba(255,255,255,0.5); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🚀 前端 → 全栈 学习路线图（Node.js 方向）</h1>
+
+  <div class="map">
+    <div class="branch b1">
+      <h2>🗄️ 数据库</h2>
+      <ul>
+        <li><span class="tag p0">P0</span> PostgreSQL + SQL</li>
+        <li><span class="tag p0">P0</span> Prisma ORM</li>
+        <li><span class="tag p0">P0</span> Redis 缓存</li>
+        <li><span class="tag p1">P1</span> 数据库设计</li>
+        <li><span class="tag p1">P1</span> 索引 & 性能</li>
+      </ul>
+    </div>
+
+    <div class="branch b2">
+      <h2>🔐 认证 & 安全</h2>
+      <ul>
+        <li><span class="tag p0">P0</span> JWT 认证</li>
+        <li><span class="tag p0">P0</span> bcrypt 密码</li>
+        <li><span class="tag p0">P0</span> OAuth 2.0</li>
+        <li><span class="tag p0">P0</span> XSS/CSRF 防护</li>
+        <li><span class="tag p1">P1</span> RBAC 权限</li>
+      </ul>
+    </div>
+
+    <div class="branch b3">
+      <h2>🐳 Docker & 部署</h2>
+      <ul>
+        <li><span class="tag p0">P0</span> Dockerfile</li>
+        <li><span class="tag p0">P0</span> docker-compose</li>
+        <li><span class="tag p0">P0</span> Vercel 部署</li>
+        <li><span class="tag p1">P1</span> Railway/Render</li>
+        <li><span class="tag p1">P1</span> GitHub Actions</li>
+      </ul>
+    </div>
+
+    <div class="branch b4">
+      <h2>⚡ 全栈框架</h2>
+      <ul>
+        <li><span class="tag p0">P0</span> Next.js App Router</li>
+        <li><span class="tag p0">P0</span> Server Actions</li>
+        <li><span class="tag p1">P1</span> tRPC</li>
+        <li><span class="tag p1">P1</span> Supabase</li>
+        <li><span class="tag p1">P1</span> TypeScript 严格</li>
+      </ul>
+    </div>
+
+    <div class="branch b5">
+      <h2>🤖 AI 集成</h2>
+      <ul>
+        <li><span class="tag p1">P1</span> OpenAI API</li>
+        <li><span class="tag p1">P1</span> 流式输出 SSE</li>
+        <li><span class="tag p1">P1</span> Function Calling</li>
+        <li><span class="tag p2">P2</span> 向量数据库</li>
+        <li><span class="tag p2">P2</span> RAG 应用</li>
+      </ul>
+    </div>
+
+    <div class="branch b6">
+      <h2>🔧 工程化</h2>
+      <ul>
+        <li><span class="tag p1">P1</span> 错误处理规范</li>
+        <li><span class="tag p1">P1</span> API 文档(Swagger)</li>
+        <li><span class="tag p1">P1</span> 单元测试 Vitest</li>
+        <li><span class="tag p2">P2</span> Sentry 监控</li>
+        <li><span class="tag p2">P2</span> 日志规范 pino</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <h2>📅 3个月执行路线</h2>
+    <div class="months">
+      <div class="month m1">
+        <h3>🔵 第1个月：打地基</h3>
+        <div class="week">
+          <div class="week-title">Week 1-2</div>
+          <div class="week-content">PostgreSQL + Prisma，做 CRUD API</div>
+        </div>
+        <div class="week">
+          <div class="week-title">Week 3</div>
+          <div class="week-content">JWT 认证系统（注册/登录/刷新）</div>
+        </div>
+        <div class="week">
+          <div class="week-title">Week 4</div>
+          <div class="week-content">Docker 容器化，docker-compose 编排</div>
+        </div>
+      </div>
+
+      <div class="month m2">
+        <h3>🟢 第2个月：做完整项目</h3>
+        <div class="week">
+          <div class="week-title">Week 5-6</div>
+          <div class="week-content">Next.js 全栈项目（博客/CMS）</div>
+        </div>
+        <div class="week">
+          <div class="week-title">Week 7</div>
+          <div class="week-content">Vercel + Supabase 部署上线</div>
+        </div>
+        <div class="week">
+          <div class="week-title">Week 8</div>
+          <div class="week-content">集成 AI 功能（流式输出）</div>
+        </div>
+      </div>
+
+      <div class="month m3">
+        <h3>🟣 第3个月：专项突破</h3>
+        <div class="week">
+          <div class="week-title">Week 9-10</div>
+          <div class="week-content">选方向深入：SaaS / AI应用 / 实时应用</div>
+        </div>
+        <div class="week">
+          <div class="week-title">Week 11</div>
+          <div class="week-content">代码质量：TS严格模式 + 测试</div>
+        </div>
+        <div class="week">
+          <div class="week-title">Week 12</div>
+          <div class="week-content">作品集整理，GitHub + 技术博客</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="core">
+    <h2>⚡ AI 时代核心竞争力</h2>
+    <div class="core-items">
+      <div class="core-item">
+        <div class="num">01</div>
+        <div class="label">架构设计</div>
+        <div class="desc">数据库设计、API 划分，AI 不会替你做</div>
+      </div>
+      <div class="core-item">
+        <div class="num">02</div>
+        <div class="label">需求拆解</div>
+        <div class="desc">业务 → 技术方案的翻译能力</div>
+      </div>
+      <div class="core-item">
+        <div class="num">03</div>
+        <div class="label">调试排错</div>
+        <div class="desc">出了问题能快速定位，不靠 AI 瞎猜</div>
+      </div>
+      <div class="core-item">
+        <div class="num">04</div>
+        <div class="label">安全意识</div>
+        <div class="desc">知道哪里容易出安全问题</div>
+      </div>
+      <div class="core-item">
+        <div class="num">05</div>
+        <div class="label">你是架构师</div>
+        <div class="desc">AI 是高级程序员，你负责思考，它负责执行</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
